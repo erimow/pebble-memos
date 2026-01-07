@@ -1,0 +1,33 @@
+{
+    "targetPlatforms": [
+        "basalt"
+    ], 
+    "displayName": "Memos", 
+    "name": "Memos", 
+    "messageKeys": {
+        "KEY_MEMO_OK": 2, 
+        "KEY_MEMO_DONE": 1, 
+        "KEY_MEMO_CHUNK": 0, 
+        "KEY_MEMO_FAIL": 3
+    }, 
+    "companyName": "erimow", 
+    "enableMultiJS": true, 
+    "versionLabel": "1.0", 
+    "capabilities": [], 
+    "sdkVersion": "3", 
+    "appKeys": {
+        "KEY_MEMO_OK": 2, 
+        "KEY_MEMO_DONE": 1, 
+        "KEY_MEMO_CHUNK": 0, 
+        "KEY_MEMO_FAIL": 3
+    }, 
+    "longName": "Memos", 
+    "shortName": "Memos", 
+    "watchapp": {
+        "watchface": false
+    }, 
+    "resources": {
+        "media": []
+    }, 
+    "uuid": "64cf3c66-9218-4f8a-8861-f25f1cc0efaa"
+}

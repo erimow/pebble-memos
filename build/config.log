@@ -1,0 +1,25 @@
+# project  configured on Tue Jan  6 16:38:56 2026 by
+# waf 1.7.11 (abi 98, python2.7 2070df0 on linux2)
+# using /home/erik/.pebble-sdk/SDKs/current/sdk-core/pebble/waf configure
+#
+----------------------------------------
+Setting top to
+/home/erik/Projects/PebbleProjects/Memos
+----------------------------------------
+Setting out to
+/home/erik/Projects/PebbleProjects/Memos/build
+----------------------------------------
+Checking for program webpack
+/home/erik/.pebble-sdk/SDKs/current/node_modules/.bin/webpack
+find program=['webpack'] paths=['/home/erik/.pebble-sdk/SDKs/current/node_modules/.bin'] var='WEBPACK' -> '/home/erik/.pebble-sdk/SDKs/current/node_modules/.bin/webpack'
+----------------------------------------
+Found Pebble SDK for basalt in:
+/home/erik/.pebble-sdk/SDKs/current/sdk-core/pebble/basalt
+----------------------------------------
+Checking for program gcc,cc
+arm-none-eabi-gcc
+find program=['gcc', 'cc'] paths='' var='CC' -> 'arm-none-eabi-gcc'
+----------------------------------------
+Checking for program ar
+arm-none-eabi-ar
+find program=['ar'] paths='' var='AR' -> 'arm-none-eabi-ar'

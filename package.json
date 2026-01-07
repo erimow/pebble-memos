@@ -1,0 +1,29 @@
+{
+  "name": "Memos",
+  "author": "erimow",
+  "version": "1.0.0",
+  "keywords": ["pebble-app"],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "Memos",
+    "uuid": "64cf3c66-9218-4f8a-8861-f25f1cc0efaa",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "basalt"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "messageKeys": {
+      "KEY_MEMO_CHUNK": 0,
+      "KEY_MEMO_DONE": 1,
+      "KEY_MEMO_OK": 2,
+      "KEY_MEMO_FAIL": 3
+    },
+    "resources": {
+      "media": []
+    }
+  }
+}
