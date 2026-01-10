@@ -1,6 +1,8 @@
 ## Memos App For Pebble
 
-A small little app to send thoughts or notes to your self hosted memos server. //put link to their github
+A small little app to send thoughts or notes to your self hosted memos server.
+
+* <https://github.com/usememos/memos>
 
 ### Features
 
