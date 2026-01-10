@@ -1,5 +1,10 @@
-var MEMOS_URL = "https://notes.erimow.com/api/v1/memos";
-var MEMOS_TOKEN = "eyJhbGciOiJIUzI1NiIsImtpZCI6InYxIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiZXJpbW93IiwiaXNzIjoibWVtb3MiLCJzdWIiOiIxIiwiYXVkIjpbInVzZXIuYWNjZXNzLXRva2VuIl0sImlhdCI6MTc2NzcyNjAxM30.i3HuB3z-5pfgY1kJ3m9St7zHEi_VxrHNq2jykpZnMj8";
+function getSettings() {
+  var s = localStorage.getItem("memos_settings");
+  if (!s) return null;
+  return JSON.parse(s);
+}
+
+
 
 var AUTO_TAGS = ["#pebble"]; // ["#separate, #by, #commas, #for, #extra, #tags"]
 
@@ -68,8 +73,8 @@ if (typeof chunk !== "string") {
   isSending = true;
 
   try {
-    var finalMemo = parseMemo(memoText);
-    sendMemo(finalMemo);
+    // var finalMemo = parseMemo(memoText);
+    sendMemo(memoText);
   } catch (err) {
     console.log("Memos: Parse error", err);
     isSending = false;
@@ -82,9 +87,16 @@ if (typeof chunk !== "string") {
  * ========================================================= */
 function sendMemo(finalMemo) {
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", MEMOS_URL, true);
+  var settings = getSettings();
+  if (!settings || !settings.url || !settings.token) {
+  Pebble.sendAppMessage({ "KEY_MEMO_FAIL": 1 });
+  return;
+}
+  AUTO_TAGS = settings.tags ? settings.tags.split(/\s+/) : ["#pebble"];
+  finalMemo = parseMemo(finalMemo);
+  xhr.open("POST", settings.url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.setRequestHeader("Authorization", "Bearer " + MEMOS_TOKEN);
+  xhr.setRequestHeader("Authorization", "Bearer " + settings.token);
 
   xhr.onload = function () {
     isSending = false;
@@ -112,5 +124,23 @@ function sendMemo(finalMemo) {
  * ========================================================= */
 Pebble.addEventListener("ready", function () {
   console.log("Memos: PebbleKit JS ready");
+});
+
+
+Pebble.addEventListener("showConfiguration", function() {
+    console.log("Memos: Opening config page");
+  Pebble.openURL("https://erimow.github.io/memos-config/config.html");
+});
+
+Pebble.addEventListener("webviewclosed", function(e) {
+  if (!e.response) return;
+
+  try {
+    var settings = JSON.parse(decodeURIComponent(e.response));
+    localStorage.setItem("memos_settings", JSON.stringify(settings));
+    console.log("Memos: Settings saved", settings);
+  } catch (err) {
+    console.log("Memos: Failed to parse settings", err);
+  }
 });
 

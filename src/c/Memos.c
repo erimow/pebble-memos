@@ -102,7 +102,9 @@ static void dictation_callback(DictationSession *session,
 
 static void start_dictation(void) {
   if (!s_dictation) {
-    s_dictation = dictation_session_create(1024, dictation_callback, NULL);
+    s_dictation = dictation_session_create(
+        0, dictation_callback,
+        NULL); // could limit byte size. Fomerly 1024. 0 is unlimited I believe
   }
 
   dictation_session_start(s_dictation);
@@ -114,7 +116,7 @@ static void start_dictation(void) {
 
 static void inbox_received_handler(DictionaryIterator *iter, void *context) {
   if (dict_find(iter, KEY_MEMO_OK)) {
-    show_status("Sent ✓", true);
+    show_status("Sent 👍", true);
   } else if (dict_find(iter, KEY_MEMO_FAIL)) {
     show_status("Send Failed", false);
   }
@@ -156,7 +158,7 @@ static void init(void) {
 
   /* ---- Quick launch: start dictation immediately ---- */
   if (launch_reason() == APP_LAUNCH_QUICK_LAUNCH) {
-    app_timer_register(300, (AppTimerCallback)start_dictation, NULL);
+    app_timer_register(200, (AppTimerCallback)start_dictation, NULL);
   }
 }
 

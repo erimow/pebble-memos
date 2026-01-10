@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Memos Settings</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+    }
+    input, textarea {
+      width: 100%;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Memos Settings</h2>
+
+<label>
+  Memos Server URL
+  <input id="url" type="text" placeholder="https://memos.example.com/api/v1/memos">
+</label>
+
+<label>
+  Access Token
+  <input id="token" type="text" placeholder="Your API token">
+</label>
+
+<label>
+  Default Tags (space-separated)
+  <input id="tags" type="text" placeholder="#pebble #notes">
+</label>
+
+<button id="save">Save</button>
+
+<script>
+  // Load existing settings
+  var stored = localStorage.getItem("memos_settings");
+  if (stored) {
+    var s = JSON.parse(stored);
+    document.getElementById("url").value = s.url || "";
+    document.getElementById("token").value = s.token || "";
+    document.getElementById("tags").value = s.tags || "";
+  }
+
+  document.getElementById("save").addEventListener("click", function() {
+    var settings = {
+      url: document.getElementById("url").value.trim(),
+      token: document.getElementById("token").value.trim(),
+      tags: document.getElementById("tags").value.trim()
+    };
+
+    localStorage.setItem("memos_settings", JSON.stringify(settings));
+
+    // Return settings to Pebble app
+    var returnToPebble = "pebblejs://close#" +
+      encodeURIComponent(JSON.stringify(settings));
+
+    document.location = returnToPebble;
+  });
+</script>
+
+</body>
+</html>
+

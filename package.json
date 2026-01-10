@@ -13,6 +13,10 @@
     "targetPlatforms": [
       "basalt"
     ],
+  "capabilities": [
+    "configurable",
+    "microphone"
+  ],
     "watchapp": {
       "watchface": false
     },
@@ -23,7 +27,17 @@
       "KEY_MEMO_FAIL": 3
     },
     "resources": {
-      "media": []
+      "media": [{
+        "menuIcon": true,
+      	"type": "bitmap",
+      	"name": "IMAGE_ICON",
+      	"file": "memosicon.png"
+      },
+        {
+      	"type": "bitmap",
+      	"name": "IMAGE_LOGO",
+      	"file": "memoslogo.png"
+        }]
     }
   }
 }

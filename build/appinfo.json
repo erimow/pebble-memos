@@ -13,7 +13,10 @@
     "companyName": "erimow", 
     "enableMultiJS": true, 
     "versionLabel": "1.0", 
-    "capabilities": [], 
+    "capabilities": [
+        "microphone", 
+        "configurable"
+    ], 
     "sdkVersion": "3", 
     "appKeys": {
         "KEY_MEMO_OK": 2, 
@@ -27,7 +30,19 @@
         "watchface": false
     }, 
     "resources": {
-        "media": []
+        "media": [
+            {
+                "menuIcon": true, 
+                "type": "bitmap", 
+                "name": "IMAGE_ICON", 
+                "file": "memosicon.png"
+            }, 
+            {
+                "type": "bitmap", 
+                "name": "IMAGE_LOGO", 
+                "file": "memoslogo.png"
+            }
+        ]
     }, 
     "uuid": "64cf3c66-9218-4f8a-8861-f25f1cc0efaa"
 }
