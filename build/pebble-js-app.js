@@ -172,6 +172,16 @@
 	  Pebble.sendAppMessage({ "KEY_MEMO_FAIL": 1 });
 	  return;
 	}
+	  if (settings.url.indexOf("api/v1/memos") == -1){
+	    console.log("could not find api/v1/memos");
+	    if (settings.url[settings.url.length - 1] == '/'){
+	      console.log("slash");
+	      settings.url+="api/v1/memos";
+	    }else {
+	      console.log("no slash");
+	      settings.url+="/api/v1/memos";
+	    }
+	  } 
 	  AUTO_TAGS = settings.tags ? settings.tags.split(/\s+/) : ["#pebble"];
 	  finalMemo = parseMemo(finalMemo);
 	  xhr.open("POST", settings.url, true);
@@ -209,7 +219,7 @@
 	
 	Pebble.addEventListener("showConfiguration", function() {
 	    console.log("Memos: Opening config page");
-	  Pebble.openURL("https://erimow.github.io/memos-config/config.html");
+	  Pebble.openURL("http://erimow.github.io/memos-config/config.html");
 	});
 	
 	Pebble.addEventListener("webviewclosed", function(e) {

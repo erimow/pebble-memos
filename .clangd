@@ -1,0 +1,4 @@
+CompileFlags:
+  Add:
+    - -I/home/erik/.pebble-sdk/SDKs/4.3/sdk-core/pebble/basalt/include
+    - -I/home/erik/.pebble-sdk/SDKs/4.3/sdk-core/pebble/common/include

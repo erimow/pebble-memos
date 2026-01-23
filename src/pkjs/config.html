@@ -49,10 +49,15 @@
   // Load existing settings
   var stored = localStorage.getItem("memos_settings");
   if (stored) {
-    var s = JSON.parse(stored);
-    document.getElementById("url").value = s.url || "";
-    document.getElementById("token").value = s.token || "";
-    document.getElementById("tags").value = s.tags || "";
+    try{
+      var s = JSON.parse(stored);
+      document.getElementById("url").value = s.url || "";
+      document.getElementById("token").value = s.token || "";
+      document.getElementById("tags").value = s.tags || "";
+    } catch(e){
+      console.log("Failed to parse stored settings:", e);
+      localStorage.removeItem("memos_settings");
+    }
   }
 
   document.getElementById("save").addEventListener("click", function() {

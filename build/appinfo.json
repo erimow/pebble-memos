@@ -1,6 +1,8 @@
 {
     "targetPlatforms": [
-        "basalt"
+        "basalt", 
+        "chalk", 
+        "diorite"
     ], 
     "displayName": "Memos", 
     "name": "Memos", 

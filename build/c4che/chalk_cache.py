@@ -3,9 +3,9 @@ ARFLAGS = 'rcs'
 AS = 'arm-none-eabi-gcc'
 BINDIR = '/usr/local/bin'
 BLOCK_MESSAGE_KEYS = []
-BUILD_DIR = 'basalt'
+BUILD_DIR = 'chalk'
 BUILD_TYPE = 'app'
-BUNDLE_BIN_DIR = 'basalt'
+BUNDLE_BIN_DIR = 'chalk'
 BUNDLE_NAME = 'Memos.pbw'
 CC = ['arm-none-eabi-gcc']
 CCLNK_SRC_F = []
@@ -18,12 +18,12 @@ CFLAGS = ['-std=c99', '-mcpu=cortex-m3', '-mthumb', '-ffunction-sections', '-fda
 CFLAGS_MACBUNDLE = ['-fPIC']
 CFLAGS_cshlib = ['-fPIC']
 CPPPATH_ST = '-I%s'
-DEFINES = ['RELEASE', 'PBL_PLATFORM_BASALT', 'PBL_COLOR', 'PBL_RECT', 'PBL_MICROPHONE', 'PBL_SMARTSTRAP', 'PBL_HEALTH', 'PBL_COMPASS', 'PBL_SMARTSTRAP_POWER', 'PBL_DISPLAY_WIDTH=144', 'PBL_DISPLAY_HEIGHT=168', 'PBL_SDK_3']
+DEFINES = ['RELEASE', 'PBL_PLATFORM_CHALK', 'PBL_COLOR', 'PBL_ROUND', 'PBL_MICROPHONE', 'PBL_SMARTSTRAP', 'PBL_HEALTH', 'PBL_COMPASS', 'PBL_SMARTSTRAP_POWER', 'PBL_DISPLAY_WIDTH=180', 'PBL_DISPLAY_HEIGHT=180', 'PBL_SDK_3']
 DEFINES_ST = '-D%s'
 DEST_BINFMT = 'elf'
 DEST_CPU = 'arm'
 DEST_OS = 'linux'
-INCLUDES = ['basalt']
+INCLUDES = ['chalk']
 LD = 'arm-none-eabi-ld'
 LIBDIR = '/usr/local/lib'
 LIBPATH_ST = '-L%s'
@@ -41,10 +41,10 @@ MESSAGE_KEYS_HEADER = '/home/erik/Projects/PebbleProjects/Memos/build/include/me
 MESSAGE_KEYS_JSON = '/home/erik/Projects/PebbleProjects/Memos/build/js/message_keys.json'
 NODE_PATH = '/home/erik/.pebble-sdk/SDKs/current/node_modules'
 PEBBLE_SDK_COMMON = '/home/erik/.pebble-sdk/SDKs/current/sdk-core/pebble/common'
-PEBBLE_SDK_PLATFORM = '/home/erik/.pebble-sdk/SDKs/current/sdk-core/pebble/basalt'
+PEBBLE_SDK_PLATFORM = '/home/erik/.pebble-sdk/SDKs/current/sdk-core/pebble/chalk'
 PEBBLE_SDK_ROOT = '/home/erik/.pebble-sdk/SDKs/current/sdk-core/pebble'
-PLATFORM = {'TAGS': ['basalt', 'color', 'rect', 'mic', 'strap', 'strappower', 'compass', 'health', '144w', '168h'], 'MAX_FONT_GLYPH_SIZE': 256, 'ADDITIONAL_TEXT_LINES_FOR_PEBBLE_H': [], 'MAX_APP_BINARY_SIZE': 65536, 'MAX_RESOURCES_SIZE': 1048576, 'MAX_APP_MEMORY_SIZE': 65536, 'MAX_WORKER_MEMORY_SIZE': 10240, 'NAME': 'basalt', 'BUNDLE_BIN_DIR': 'basalt', 'BUILD_DIR': 'basalt', 'MAX_RESOURCES_SIZE_APPSTORE': 262144, 'DEFINES': ['PBL_PLATFORM_BASALT', 'PBL_COLOR', 'PBL_RECT', 'PBL_MICROPHONE', 'PBL_SMARTSTRAP', 'PBL_HEALTH', 'PBL_COMPASS', 'PBL_SMARTSTRAP_POWER', 'PBL_DISPLAY_WIDTH=144', 'PBL_DISPLAY_HEIGHT=168']}
-PLATFORM_NAME = 'basalt'
+PLATFORM = {'TAGS': ['chalk', 'color', 'round', 'mic', 'strap', 'strappower', 'compass', 'health', '180w', '180h'], 'MAX_FONT_GLYPH_SIZE': 256, 'ADDITIONAL_TEXT_LINES_FOR_PEBBLE_H': [], 'MAX_APP_BINARY_SIZE': 65536, 'MAX_RESOURCES_SIZE': 1048576, 'MAX_APP_MEMORY_SIZE': 65536, 'MAX_WORKER_MEMORY_SIZE': 10240, 'NAME': 'chalk', 'BUNDLE_BIN_DIR': 'chalk', 'BUILD_DIR': 'chalk', 'MAX_RESOURCES_SIZE_APPSTORE': 262144, 'DEFINES': ['PBL_PLATFORM_CHALK', 'PBL_COLOR', 'PBL_ROUND', 'PBL_MICROPHONE', 'PBL_SMARTSTRAP', 'PBL_HEALTH', 'PBL_COMPASS', 'PBL_SMARTSTRAP_POWER', 'PBL_DISPLAY_WIDTH=180', 'PBL_DISPLAY_HEIGHT=180']}
+PLATFORM_NAME = 'chalk'
 PREFIX = '/usr/local'
 PROJECT_INFO = {'appKeys': {u'KEY_MEMO_OK': 2, u'KEY_MEMO_FAIL': 3, u'KEY_MEMO_CHUNK': 0, u'KEY_MEMO_DONE': 1}, u'sdkVersion': u'3', u'displayName': u'Memos', u'uuid': u'64cf3c66-9218-4f8a-8861-f25f1cc0efaa', u'messageKeys': {u'KEY_MEMO_OK': 2, u'KEY_MEMO_FAIL': 3, u'KEY_MEMO_CHUNK': 0, u'KEY_MEMO_DONE': 1}, 'companyName': u'erimow', u'enableMultiJS': True, u'targetPlatforms': [u'basalt', u'chalk', u'diorite'], u'capabilities': [u'configurable', u'microphone'], 'versionLabel': u'1.0', 'longName': u'Memos', 'shortName': u'Memos', u'watchapp': {u'watchface': False}, u'resources': {u'media': [{u'menuIcon': True, u'type': u'bitmap', u'name': u'IMAGE_ICON', u'file': u'memosicon.png'}, {u'type': u'bitmap', u'name': u'IMAGE_LOGO', u'file': u'memoslogo.png'}]}, 'name': u'Memos'}
 REQUESTED_PLATFORMS = [u'basalt', u'chalk', u'diorite']

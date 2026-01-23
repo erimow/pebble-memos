@@ -1,6 +1,7 @@
 #include <pebble.h>
+#include <stdint.h>
 
-/* ---------- AppMessage keys (must match package.json + JS) ---------- */
+/* ---------- AppMessage keys ---------- */
 enum {
   KEY_MEMO_CHUNK = 0,
   KEY_MEMO_DONE = 1,
@@ -11,6 +12,8 @@ enum {
 /* ---------- UI ---------- */
 static Window *s_main_window;
 static TextLayer *s_text_layer;
+static MenuLayer *s_menu_layer;
+static ActionBarLayer *s_actionbar_layer;
 
 /* ---------- Dictation ---------- */
 static DictationSession *s_dictation;
@@ -18,10 +21,32 @@ static DictationSession *s_dictation;
 /* ---------- Timers ---------- */
 static AppTimer *s_status_timer;
 
+/* ---------- Values ----------- */
+static uint16_t s_num_menu_rows = 0;
+
 /* ---------- Forward declarations ---------- */
 static void start_dictation(void);
 static void show_status(const char *msg, bool success);
 static void clear_status(void *data);
+
+/* =================================================================== */
+/*                           CALLBACKS                                 */
+/* =================================================================== */
+
+static uint16_t menu_get_num_rows_callback(MenuLayer *menuLayer,
+                                           uint16_t section_index,
+                                           void *context) {
+  return s_num_menu_rows;
+}
+
+static void menu_draw_row_callback(GContext *ctx, const Layer *cell_layer,
+                                   MenuIndex *cell_index, void *data) {
+  if (cell_index->row == 0) {
+    if (menu_cell_layer_is_highlighted(cell_layer)) {
+      menu_cell_title_draw(ctx, cell_layer, "+");
+    }
+  }
+}
 
 /* =================================================================== */
 /*                               UI                                    */
@@ -40,6 +65,21 @@ static void main_window_load(Window *window) {
   text_layer_set_text(s_text_layer, "Press Select\nto Dictate");
 
   layer_add_child(window_layer, text_layer_get_layer(s_text_layer));
+
+  // s_menu_layer = menu_layer_create(bounds);
+  // menu_layer_set_click_config_onto_window(s_menu_layer, window);
+  // menu_layer_set_callbacks(
+  //     s_menu_layer, NULL,
+  //     (MenuLayerCallbacks){.get_num_rows = menu_get_num_rows_callback,
+  //                          .draw_row = menu_draw_row_callback,
+  //                          .select_long_click = menu_select_long_callback,
+  //                          .select_click = menu_select_callback});
+  // layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
+
+  // s_actionbar_layer = action_bar_layer_create();
+  //
+  // layer_add_child(window_layer,
+  // action_bar_layer_get_layer(s_actionbar_layer));
 }
 
 static void main_window_unload(Window *window) {
@@ -130,12 +170,30 @@ static void inbox_dropped_handler(AppMessageResult reason, void *context) {
 /*                           INPUT                                      */
 /* =================================================================== */
 
+static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index,
+                                 void *context) {
+  // enlarge note
+}
+
+static void menu_select_long_callback(MenuLayer *menu_layer,
+                                      MenuIndex *cell_index, void *context) {
+  // do something on long press?
+}
+
 static void select_click_handler(ClickRecognizerRef ref, void *context) {
   start_dictation();
 }
+// static void select_click_handler(ClickRecognizerRef ref, void *context) {
+//
+// }
+// static void select_click_handler(ClickRecognizerRef ref, void *context) {
+//
+// }
 
 static void click_config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
+  // window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
+  // window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
 /* =================================================================== */
@@ -170,6 +228,14 @@ static void deinit(void) {
   if (s_status_timer) {
     app_timer_cancel(s_status_timer);
   }
+
+  // if (s_menu_layer) {
+  //   menu_layer_destroy(s_menu_layer);
+  // }
+
+  // if (s_actionbar_layer) {
+  //   action_bar_layer_destroy(s_actionbar_layer);
+  // }
 
   window_destroy(s_main_window);
 }
