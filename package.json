@@ -39,7 +39,17 @@
       	"type": "bitmap",
       	"name": "IMAGE_LOGO",
       	"file": "memoslogo.png"
-        }]
+        },
+      {
+      	"type": "bitmap",
+      	"name": "IMAGE_SEND",
+      	"file": "send.png"
+      },
+      {
+      	"type": "bitmap",
+      	"name": "IMAGE_DICTATE",
+      	"file": "mic.png"
+      }]
     }
   }
 }
