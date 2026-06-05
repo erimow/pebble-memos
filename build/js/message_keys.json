@@ -1,0 +1,6 @@
+{
+    "KEY_MEMO_CHUNK": 0,
+    "KEY_MEMO_DONE": 1,
+    "KEY_MEMO_FAIL": 3,
+    "KEY_MEMO_OK": 2
+}
