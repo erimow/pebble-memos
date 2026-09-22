@@ -80,7 +80,7 @@ static void main_window_load(Window *window) {
       s_scroll_layer,
       (ScrollLayerCallbacks){.click_config_provider = click_config_provider});
   scroll_layer_set_content_size(s_scroll_layer,
-                                (GSize){bounds.size.w, bounds.size.h * 4});
+                                (GSize){bounds.size.w, bounds.size.h});
 
   scroll_layer_add_child(s_scroll_layer, text_layer_get_layer(s_text_layer));
   layer_add_child(window_layer, scroll_layer_get_layer(s_scroll_layer));
@@ -99,9 +99,9 @@ static void main_window_load(Window *window) {
   send_image = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_SEND);
 
   s_actionbar_layer = action_bar_layer_create();
-  action_bar_layer_set_icon_animated(s_actionbar_layer, BUTTON_ID_DOWN,
-                                     mic_image, true);
   action_bar_layer_set_icon_animated(s_actionbar_layer, BUTTON_ID_SELECT,
+                                     mic_image, true);
+  action_bar_layer_set_icon_animated(s_actionbar_layer, BUTTON_ID_DOWN,
                                      send_image, true);
   //
   //  layer_add_child(window_layer,
@@ -182,6 +182,11 @@ static void dictation_callback(DictationSession *session,
   // strcat_s(s_message, transcription, 1024);
   // strncpy(s_message, transcription,1024);
   text_layer_set_text(s_text_layer, s_message);
+  GSize textSize = text_layer_get_content_size(s_text_layer);
+  textSize.w = layer_get_bounds(text_layer_get_layer(s_text_layer)).size.w;
+  printf("get content size print test: w=%d, h=%d", textSize.w, textSize.h);
+  // text_layer_set_size(s_text_layer, textSize);
+  scroll_layer_set_content_size(s_scroll_layer, textSize);
 }
 
 static void start_dictation(void) {
@@ -228,11 +233,10 @@ static void inbox_dropped_handler(AppMessageResult reason, void *context) {
 
 static void
 action_select_click_handler(ClickRecognizerRef ref,
-                            void *context) { // on action bar select, send
-  send(s_message);
+                            void *context) { // on action bar select, diction
+  start_dictation();
   action_bar_layer_remove_from_window(s_actionbar_layer);
   scroll_layer_set_click_config_onto_window(s_scroll_layer, s_main_window);
-  scroll_layer_set_content_offset(s_scroll_layer, GPointZero, true);
 }
 static void action_up_click_handler(ClickRecognizerRef ref, void *context) {
   //???
@@ -240,9 +244,10 @@ static void action_up_click_handler(ClickRecognizerRef ref, void *context) {
   scroll_layer_set_click_config_onto_window(s_scroll_layer, s_main_window);
 }
 static void action_down_click_handler(ClickRecognizerRef ref, void *context) {
-  start_dictation();
+  send(s_message);
   action_bar_layer_remove_from_window(s_actionbar_layer);
   scroll_layer_set_click_config_onto_window(s_scroll_layer, s_main_window);
+  scroll_layer_set_content_offset(s_scroll_layer, GPointZero, true);
 }
 static void action_back_click_handler(ClickRecognizerRef ref, void *context) {
   action_bar_layer_remove_from_window(s_actionbar_layer);
