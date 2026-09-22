@@ -126,6 +126,7 @@ static void clear_status(void *data) {
 
 static void show_status(const char *msg, bool success) {
   text_layer_set_text(s_text_layer, msg);
+  scroll_layer_set_content_offset(s_scroll_layer, GPointZero, true);
 
   if (success) {
     vibes_short_pulse();
@@ -206,7 +207,10 @@ static void start_dictation(void) {
 static void inbox_received_handler(DictionaryIterator *iter, void *context) {
   if (dict_find(iter, KEY_MEMO_OK)) {
     show_status("Sent 👍", true);
+    GRect bounds = layer_get_bounds(window_get_root_layer(s_main_window));
     s_message[0] = '\0';
+    scroll_layer_set_content_size(s_scroll_layer,
+                                  (GSize){bounds.size.w, bounds.size.h});
   } else if (dict_find(iter, KEY_MEMO_FAIL)) {
     show_status("Send Failed", false);
   }
@@ -247,7 +251,6 @@ static void action_down_click_handler(ClickRecognizerRef ref, void *context) {
   send(s_message);
   action_bar_layer_remove_from_window(s_actionbar_layer);
   scroll_layer_set_click_config_onto_window(s_scroll_layer, s_main_window);
-  scroll_layer_set_content_offset(s_scroll_layer, GPointZero, true);
 }
 static void action_back_click_handler(ClickRecognizerRef ref, void *context) {
   action_bar_layer_remove_from_window(s_actionbar_layer);
